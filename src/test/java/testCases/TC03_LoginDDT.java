@@ -14,7 +14,7 @@ public class TC03_LoginDDT extends BaseClass {
 
 	@Test(dataProvider = "loginData", dataProviderClass = DataProviders.class , groups="DataDriven")
 	public void verify_loginDDT(String email, String password, String exp) {
-		logger.info("TC03_Started");
+		logger.info("TC03_Started..........");
 
 		try {
 			HomePage HP = new HomePage(driver);
@@ -22,20 +22,24 @@ public class TC03_LoginDDT extends BaseClass {
 			HP.loginClick();;
 
 			LoginAccountPage LP = new LoginAccountPage(driver);
+			logger.info("entered a username details");
 			LP.enterUsername(email);
+			logger.info("password entered ");
 			LP.enterPassword(password);
+			logger.info("click on login button .........");
 			LP.clickLoginButton();
 
 			MyAccountPage AP = new MyAccountPage(driver);
 			Boolean targetPage = AP.accountPageExist();
 
-			logger.info("Validation started");
+			logger.info("....Validation Started....");
 
 			if (exp.equalsIgnoreCase("Valid")) {
 
 				if (targetPage == true) {
 
 					AP.logoutClick();
+					
 					Assert.assertTrue(true);
 				} else {
 					Assert.assertTrue(false);
@@ -60,7 +64,7 @@ public class TC03_LoginDDT extends BaseClass {
 
 		}
 
-		logger.info("TC03_completed");
+		logger.info("TC03_completed.............");
 	}
 
 }
