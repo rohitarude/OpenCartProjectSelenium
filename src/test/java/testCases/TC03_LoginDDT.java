@@ -12,14 +12,15 @@ import utilities.DataProviders;
 
 public class TC03_LoginDDT extends BaseClass {
 
-	@Test(dataProvider = "loginData", dataProviderClass = DataProviders.class , groups="DataDriven")
+	@Test(dataProvider = "loginData", dataProviderClass = DataProviders.class, groups = "DataDriven")
 	public void verify_loginDDT(String email, String password, String exp) {
 		logger.info("TC03_Started..........");
 
 		try {
 			HomePage HP = new HomePage(driver);
 			HP.myAccount();
-			HP.loginClick();;
+			HP.loginClick();
+			;
 
 			LoginAccountPage LP = new LoginAccountPage(driver);
 			logger.info("entered a username details");
@@ -36,23 +37,20 @@ public class TC03_LoginDDT extends BaseClass {
 
 			if (exp.equalsIgnoreCase("Valid")) {
 
-				if (targetPage == true) {
-
+				if (targetPage) {
 					AP.logoutClick();
-					
 					Assert.assertTrue(true);
 				} else {
-					Assert.assertTrue(false);
+					Assert.fail();
 				}
 
 			} else if (exp.equalsIgnoreCase("Invalid")) {
 
-				if (targetPage == false) {
-					AP.logoutClick();
+				if (!targetPage) {
 					Assert.assertTrue(true);
-
 				} else {
-					Assert.assertTrue(false);
+					AP.logoutClick();
+					Assert.fail();
 				}
 
 			}
